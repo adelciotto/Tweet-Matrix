@@ -1,0 +1,253 @@
+* {
+	margin: 0;
+  	padding: 0;
+}
+
+html,
+body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+  	-ms-user-select: none;
+  	-moz-user-select: none;
+  	-webkit-user-select: none;
+  	user-select: none;
+}
+
+body.idle, body.idle * 
+{
+	cursor: none !important;
+}
+
+body.idle .idleable
+{
+	opacity: 0; 
+}
+
+.idleable {
+	opacity: 1;
+	-webkit-transition: opacity 500ms linear;
+			-moz-transition: opacity 500ms linear;
+				transition: opacity 500ms linear; 
+}
+
+#container {
+	overflow: hidden;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-family: 'Open Sans', sans-serif;
+    text-shadow: 0 0.025em 0 rgba(0, 0, 0, 0.1);
+}
+
+/* title and info styling */
+#title {
+	z-index: 2;
+	position: absolute;
+	padding: 15px;
+	right: 1px;
+	font-size: 0.6rem;
+}
+	#title p, a {
+		color: #f5f8fa;
+	}
+		#title p {
+			font-weight: bold;
+		}
+
+/* styling for matrix button */
+#matrix-button {
+	position: absolute;
+	width: 22px;
+	height: 23px;
+	z-index: 2;
+	background: url(../images/matrix.png) center center no-repeat;
+	cursor: pointer;
+	padding: 10px;
+	left: 1px; 
+}
+
+#matrix-select-container {
+	opacity: 0;
+	z-index: 3;
+	pointer-events: none;
+	position: fixed;
+	top: 10px;
+	left: 10px; 
+}
+	#matrix-select-container.showing {
+	  	display: block;
+	    opacity: 1;
+	    pointer-events: auto;
+	    -webkit-transition: opacity 100ms linear;
+	    	-moz-transition: opacity 100ms linear;
+	    		transition: opacity 100ms linear; 
+	}
+
+#matrix-select {
+	border-collapse: separate;
+}
+
+#matrix-select td {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	background: rgba(255, 255, 255, 0.2); 
+}
+	#matrix-select td.highlight {
+    	background: rgba(255, 255, 255, 0.5); 
+    }	
+    #matrix-select td.select {
+    	background: #ddd; 
+    }
+  	#matrix-select td.highlight.select {
+    	background: #fff; 
+    }
+
+/* styling for matrix container which holds all the cells */
+#matrix-container {
+	z-index: 1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+/* styling for individual cells */
+.trend-cell {
+	position: relative;
+	display: inline-block;
+	letter-spacing: -3.049999952316284px;
+	line-height: normal;
+	text-shadow: rgba(0, 0, 0, 0.0980392) 0px 1.524999976158142px 0px;
+	-webkit-perspective: 600px;
+		-moz-perspective: 800px;
+			perspective: 600px;
+
+}
+
+.trend-cell .front {
+	float: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: inherit;
+	height: inherit;
+
+	-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+					transform-style: preserve-3d;
+
+	-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden; 
+					backface-visibility: hidden;
+
+	/* -- transition is the magic sauce for animation -- */
+	-webkit-transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+			-moz-transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+					transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+	-moz-transition: transform 0s;
+}
+
+.author {
+	color: #f5f8fa;
+	text-decoration: none;
+	position: absolute;
+	right: 5%;
+	bottom: 5%;
+	padding: 0 0.5em;
+    letter-spacing: -0.05em;
+}
+
+.trend-typing {
+	color: #f5f8fa;
+	word-wrap: break-word;
+    hyphens: auto;
+    	-webkit-hyphens: auto;
+    		-moz-hyphens: auto;
+    position: absolute;
+    display: inline-block;
+    top: 35%;
+    right: 0;
+    left: 0;
+    padding: 0 0.5em;
+    letter-spacing: -0.05em;
+}
+
+.trend-cell .front.rotateY, .trend-cell .front.rotateX, .trend-cell .front.rotateNegY, .trend-cell .front.rotateNegX {
+	z-index: 1;
+	border-color: #eee;
+}
+
+.trend-cell .front.rotateY {
+  	-webkit-animation:spinY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    	-moz-animation:spinY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    		animation:spinY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.trend-cell .front.rotateX {
+  	-webkit-animation:spinX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    	-moz-animation:spinX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    		animation:spinX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.trend-cell .front.rotateNegY {
+  	-webkit-animation:spinNegY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    	-moz-animation:spinNegY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    		animation:spinNegY 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.trend-cell .front.rotateNegX {
+  	-webkit-animation:spinNegX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    	-moz-animation:spinNegX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+    		animation:spinNegX 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@-moz-keyframes spinY { 100% { -moz-transform: rotateY(360deg); } }
+@-webkit-keyframes spinY { 100% { -webkit-transform: rotateY(360deg); } }
+@keyframes spinY { 100% { -webkit-transform: rotateY(360deg); transform:rotateY(360deg); } }
+
+@-moz-keyframes spinX { 100% { -moz-transform: rotateX(360deg); } }
+@-webkit-keyframes spinX { 100% { -webkit-transform: rotateX(360deg); } }
+@keyframes spinX { 100% { -webkit-transform: rotateX(360deg); transform:rotateX(360deg); } }
+
+@-moz-keyframes spinNegY { 100% { -moz-transform: rotateY(-360deg); } }
+@-webkit-keyframes spinNegY { 100% { -webkit-transform: rotateY(-360deg); } }
+@keyframes spinNegY { 100% { -webkit-transform: rotateY(-360deg); transform:rotateY(-360deg); } }
+
+@-moz-keyframes spinNegX { 100% { -moz-transform: rotateX(-360deg); } }
+@-webkit-keyframes spinNegX { 100% { -webkit-transform: rotateX(-360deg); } }
+@keyframes spinNegX { 100% { -webkit-transform: rotateX(-360deg); transform:rotateX(-360deg); } }
+
+#typed-cursor{
+    opacity: 1;
+    font-weight: 100;
+    color: #f5f8fa;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    -ms-animation: blink 0.7s infinite;
+    -o-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
