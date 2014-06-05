@@ -3,3 +3,5 @@ app_credentials.js
 
 # Installed node modules
 node_modules/
+.DS_Store
+prebuild.sh
